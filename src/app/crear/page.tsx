@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { Label } from '@/components/ui/label'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { createClient } from '@/utils/supabase/client'
 import type { Ingredient } from '@/types/database'
 
@@ -109,12 +110,16 @@ export default function CrearReceta() {
                 onChange={e => handleIngredientChange(index, 'quantity', e.target.value)} 
                 className="w-1/4 sm:w-24"
               />
-              <Input 
-                placeholder="Unidad (Ej: gr)" 
-                value={ing.unit} 
-                onChange={e => handleIngredientChange(index, 'unit', e.target.value)} 
-                className="w-1/4 sm:w-32"
-              />
+              <Select value={ing.unit} onValueChange={v => handleIngredientChange(index, 'unit', v)}>
+                <SelectTrigger className="w-1/4 sm:w-36 bg-inherit">
+                  <SelectValue placeholder="Unidad" />
+                </SelectTrigger>
+                <SelectContent>
+                  {['grs', 'kg', 'ml', 'litros', 'cucharada(s)', 'cucharadita(s)', 'taza(s)', 'pizca', 'unidad(es)', 'al gusto'].map(u => (
+                    <SelectItem key={u} value={u}>{u}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
               <Input 
                 placeholder="Ingrediente (Ej: Harina)" 
                 value={ing.name} 
