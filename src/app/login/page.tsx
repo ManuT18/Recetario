@@ -10,7 +10,7 @@ export default async function LoginPage({
 
   return (
     <div className="flex-1 flex flex-col w-full px-8 sm:max-w-md justify-center gap-2 mx-auto mt-20">
-      <form className="flex-1 flex flex-col w-full justify-center gap-4 text-foreground">
+      <form action={login} className="flex-1 flex flex-col w-full justify-center gap-4 text-foreground">
         <h1 className="text-3xl font-serif text-center mb-6">Acceso Privado</h1>
         <label className="text-sm font-medium" htmlFor="email">
           Email
@@ -32,7 +32,7 @@ export default async function LoginPage({
           placeholder="••••••••"
           required
         />
-        <Button formAction={login} className="w-full">
+        <Button type="submit" className="w-full">
           Entrar
         </Button>
         {message && (
