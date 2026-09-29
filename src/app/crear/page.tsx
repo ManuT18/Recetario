@@ -48,6 +48,7 @@ export default function CrearReceta() {
         .from('recipes')
         .insert({
           user_id: user.id,
+          author_name: user.email ? user.email.split('@')[0] : 'Usuario',
           title,
           description,
           ingredients: cleanIngredients,

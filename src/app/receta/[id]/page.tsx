@@ -26,9 +26,17 @@ export default async function RecetaPage({ params }: { params: Promise<{ id: str
       </Link>
       
       <div className="mb-10">
-        <h1 className="text-4xl md:text-5xl font-serif font-bold text-stone-800 mb-4 leading-tight">
+        <h1 className="text-4xl md:text-5xl font-serif font-bold text-stone-800 mb-2 leading-tight">
           {recipe.title}
         </h1>
+        {recipe.author_name && (
+          <p className="text-stone-500 font-medium mb-6 flex items-center gap-2">
+            <span className="w-6 h-6 rounded-full bg-stone-200 flex items-center justify-center text-xs text-stone-600">
+              {recipe.author_name.charAt(0).toUpperCase()}
+            </span>
+            Por {recipe.author_name}
+          </p>
+        )}
         {recipe.description && (
           <p className="text-lg text-stone-600 leading-relaxed bg-white p-6 rounded-xl border border-stone-100 shadow-sm">
             {recipe.description}

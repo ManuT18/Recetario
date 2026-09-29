@@ -34,7 +34,14 @@ export default async function Home() {
             <Link key={recipe.id} href={`/receta/${recipe.id}`}>
               <Card className="h-full hover:shadow-md transition-shadow cursor-pointer bg-white border-stone-200">
                 <CardHeader>
-                  <CardTitle className="font-serif text-xl">{recipe.title}</CardTitle>
+                  <div className="flex justify-between items-start gap-4">
+                    <CardTitle className="font-serif text-xl">{recipe.title}</CardTitle>
+                    {recipe.author_name && (
+                      <span className="text-xs font-medium px-2 py-1 bg-stone-100 text-stone-600 rounded-full shrink-0">
+                        Por {recipe.author_name}
+                      </span>
+                    )}
+                  </div>
                   {recipe.description && (
                     <CardDescription className="line-clamp-2 mt-2">{recipe.description}</CardDescription>
                   )}

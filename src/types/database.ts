@@ -13,4 +13,5 @@ export type Recipe = {
   ingredients: Ingredient[];
   steps: string[];
   image_url: string | null;
+  author_name: string | null;
 }
