@@ -1,11 +1,16 @@
 import { createClient } from '@/utils/supabase/server'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
+import { Button } from '@/components/ui/button'
 import type { Recipe } from '@/types/database'
+import { deleteRecipe } from './actions'
+import { Edit, Trash2 } from 'lucide-react'
 
 export default async function RecetaPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
   const supabase = await createClient()
+
+  const { data: { user } } = await supabase.auth.getUser()
 
   const { data, error } = await supabase
     .from('recipes')
@@ -18,12 +23,29 @@ export default async function RecetaPage({ params }: { params: Promise<{ id: str
   }
 
   const recipe = data as Recipe
+  const isOwner = user?.id === recipe.user_id
 
   return (
     <div className="max-w-3xl mx-auto w-full py-8 md:py-12">
-      <Link href="/" className="text-stone-400 hover:text-stone-600 mb-6 inline-block text-sm font-medium">
-        ← Volver al inicio
-      </Link>
+      <div className="flex justify-between items-center mb-6">
+        <Link href="/" className="text-stone-400 hover:text-stone-600 text-sm font-medium">
+          ← Volver al inicio
+        </Link>
+        {isOwner && (
+          <div className="flex gap-3">
+            <Link href={`/editar/${recipe.id}`}>
+              <Button variant="outline" size="sm" className="gap-2">
+                <Edit className="w-4 h-4" /> Editar
+              </Button>
+            </Link>
+            <form action={deleteRecipe.bind(null, recipe.id)}>
+              <Button variant="destructive" size="sm" className="gap-2">
+                <Trash2 className="w-4 h-4" /> Eliminar
+              </Button>
+            </form>
+          </div>
+        )}
+      </div>
       
       <div className="mb-10">
         <h1 className="text-4xl md:text-5xl font-serif font-bold text-stone-800 mb-2 leading-tight">
