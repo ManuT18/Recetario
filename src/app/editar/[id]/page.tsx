@@ -188,9 +188,14 @@ export default function EditarReceta({ params }: { params: Promise<{ id: string 
           </Button>
         </div>
 
-        <Button type="submit" className="w-full h-12 text-lg font-semibold" disabled={loading}>
-          {loading ? 'Actualizando...' : 'Actualizar Receta'}
-        </Button>
+        <div className="flex flex-col sm:flex-row gap-4">
+          <Button type="button" variant="outline" className="w-full sm:w-1/3 h-12 text-lg font-semibold" onClick={() => router.push(`/receta/${id}`)}>
+            Cancelar
+          </Button>
+          <Button type="submit" className="w-full sm:w-2/3 h-12 text-lg font-semibold" disabled={loading}>
+            {loading ? 'Actualizando...' : 'Actualizar Receta'}
+          </Button>
+        </div>
       </form>
     </div>
   )

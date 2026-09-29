@@ -39,7 +39,7 @@ export default async function RecetaPage({ params }: { params: Promise<{ id: str
               </Button>
             </Link>
             <form action={deleteRecipe.bind(null, recipe.id)}>
-              <Button variant="destructive" size="sm" className="gap-2">
+              <Button type="submit" variant="destructive" size="sm" className="gap-2">
                 <Trash2 className="w-4 h-4" /> Eliminar
               </Button>
             </form>
