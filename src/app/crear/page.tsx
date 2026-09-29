@@ -8,6 +8,7 @@ import { Textarea } from '@/components/ui/textarea'
 import { Label } from '@/components/ui/label'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { createClient } from '@/utils/supabase/client'
+import { Trash2 } from 'lucide-react'
 import type { Ingredient } from '@/types/database'
 
 export default function CrearReceta() {
@@ -26,12 +27,18 @@ export default function CrearReceta() {
     newIngredients[index] = { ...newIngredients[index], [field]: value }
     setIngredients(newIngredients)
   }
+  const handleRemoveIngredient = (index: number) => {
+    setIngredients(ingredients.filter((_, i) => i !== index))
+  }
 
   const handleAddStep = () => setSteps([...steps, ''])
   const handleStepChange = (index: number, value: string) => {
     const newSteps = [...steps]
     newSteps[index] = value
     setSteps(newSteps)
+  }
+  const handleRemoveStep = (index: number) => {
+    setSteps(steps.filter((_, i) => i !== index))
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -103,7 +110,7 @@ export default function CrearReceta() {
         <div className="space-y-4 p-6 bg-white rounded-xl shadow-sm border border-stone-200">
           <Label className="text-xl font-serif font-semibold">Ingredientes</Label>
           {ingredients.map((ing, index) => (
-            <div key={index} className="flex gap-3">
+            <div key={index} className="flex gap-2 sm:gap-3 items-center">
               <Input 
                 placeholder="Cant. (Ej: 200)" 
                 value={ing.quantity} 
@@ -126,6 +133,11 @@ export default function CrearReceta() {
                 onChange={e => handleIngredientChange(index, 'name', e.target.value)} 
                 className="flex-1"
               />
+              {ingredients.length > 1 && (
+                <Button type="button" variant="ghost" size="icon" className="text-stone-400 hover:text-destructive shrink-0" onClick={() => handleRemoveIngredient(index)}>
+                  <Trash2 className="w-4 h-4" />
+                </Button>
+              )}
             </div>
           ))}
           <Button type="button" variant="outline" onClick={handleAddIngredient} className="w-full border-dashed">
@@ -136,7 +148,7 @@ export default function CrearReceta() {
         <div className="space-y-4 p-6 bg-white rounded-xl shadow-sm border border-stone-200">
           <Label className="text-xl font-serif font-semibold">Pasos de Preparación</Label>
           {steps.map((step, index) => (
-            <div key={index} className="flex gap-3 items-start">
+            <div key={index} className="flex gap-2 sm:gap-3 items-start">
               <span className="flex-shrink-0 w-8 h-8 rounded-full bg-stone-100 flex items-center justify-center font-semibold text-stone-500 mt-1">
                 {index + 1}
               </span>
@@ -146,6 +158,11 @@ export default function CrearReceta() {
                 onChange={e => handleStepChange(index, e.target.value)} 
                 className="flex-1 resize-none min-h-[80px]"
               />
+              {steps.length > 1 && (
+                <Button type="button" variant="ghost" size="icon" className="text-stone-400 hover:text-destructive shrink-0 mt-1" onClick={() => handleRemoveStep(index)}>
+                  <Trash2 className="w-4 h-4" />
+                </Button>
+              )}
             </div>
           ))}
           <Button type="button" variant="outline" onClick={handleAddStep} className="w-full border-dashed">
