@@ -117,7 +117,7 @@ export default function CrearReceta() {
                 onChange={e => handleIngredientChange(index, 'quantity', e.target.value)} 
                 className="w-1/4 sm:w-24"
               />
-              <Select value={ing.unit} onValueChange={v => handleIngredientChange(index, 'unit', v)}>
+              <Select value={ing.unit} onValueChange={v => handleIngredientChange(index, 'unit', v || '')}>
                 <SelectTrigger className="w-1/4 sm:w-36 bg-inherit">
                   <SelectValue placeholder="Unidad" />
                 </SelectTrigger>
