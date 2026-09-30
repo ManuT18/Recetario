@@ -52,11 +52,13 @@ export default function CrearReceta() {
       const cleanIngredients = ingredients.filter(i => i.name.trim() !== '')
       const cleanSteps = steps.filter(s => s.trim() !== '')
 
+      const nickname = user.user_metadata?.apodo || user.user_metadata?.nickname || user.user_metadata?.name || user.user_metadata?.full_name
+      
       const { data, error } = await supabase
         .from('recipes')
         .insert({
           user_id: user.id,
-          author_name: user.email ? user.email.split('@')[0] : 'Usuario',
+          author_name: nickname || (user.email ? user.email.split('@')[0] : 'Usuario'),
           title,
           description,
           ingredients: cleanIngredients,
