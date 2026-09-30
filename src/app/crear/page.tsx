@@ -112,15 +112,15 @@ export default function CrearReceta() {
         <div className="space-y-4 p-6 bg-white rounded-xl shadow-sm border border-stone-200">
           <Label className="text-xl font-serif font-semibold">Ingredientes</Label>
           {ingredients.map((ing, index) => (
-            <div key={index} className="flex gap-2 sm:gap-3 items-center">
+            <div key={index} className="grid grid-cols-[1fr_1fr_auto] sm:flex sm:flex-row gap-2 sm:gap-3 items-center bg-stone-50/50 sm:bg-transparent p-3 sm:p-0 rounded-lg border border-stone-100 sm:border-none">
               <Input 
                 placeholder="Cant. (Ej: 200)" 
                 value={ing.quantity} 
                 onChange={e => handleIngredientChange(index, 'quantity', e.target.value)} 
-                className="w-1/4 sm:w-24"
+                className="col-span-1 sm:w-24"
               />
               <Select value={ing.unit} onValueChange={v => handleIngredientChange(index, 'unit', v || '')}>
-                <SelectTrigger className="w-1/4 sm:w-36 bg-inherit">
+                <SelectTrigger className="col-span-1 sm:w-36 bg-white sm:bg-inherit">
                   <SelectValue placeholder="Unidad" />
                 </SelectTrigger>
                 <SelectContent>
@@ -129,14 +129,19 @@ export default function CrearReceta() {
                   ))}
                 </SelectContent>
               </Select>
+              {ingredients.length > 1 && (
+                <Button type="button" variant="ghost" size="icon" className="col-span-1 sm:hidden text-stone-400 hover:text-destructive justify-self-end" onClick={() => handleRemoveIngredient(index)}>
+                  <Trash2 className="w-4 h-4" />
+                </Button>
+              )}
               <Input 
                 placeholder="Ingrediente (Ej: Harina)" 
                 value={ing.name} 
                 onChange={e => handleIngredientChange(index, 'name', e.target.value)} 
-                className="flex-1"
+                className="col-span-3 sm:col-span-1 sm:flex-1"
               />
               {ingredients.length > 1 && (
-                <Button type="button" variant="ghost" size="icon" className="text-stone-400 hover:text-destructive shrink-0" onClick={() => handleRemoveIngredient(index)}>
+                <Button type="button" variant="ghost" size="icon" className="hidden sm:flex text-stone-400 hover:text-destructive shrink-0" onClick={() => handleRemoveIngredient(index)}>
                   <Trash2 className="w-4 h-4" />
                 </Button>
               )}

@@ -76,9 +76,9 @@ export default async function RecetaPage({ params }: { params: Promise<{ id: str
             <ul className="space-y-4">
               {recipe.ingredients?.map((ing, i) => (
                 <li key={i} className="flex flex-col text-stone-700">
-                  <div className="flex items-baseline justify-between">
+                  <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 sm:gap-2 border-b border-stone-100 pb-2 last:border-0 last:pb-0">
                     <span className="font-medium leading-tight">{ing.name}</span>
-                    <span className="text-sm text-stone-500 font-mono bg-stone-50 px-2 py-0.5 rounded ml-2 whitespace-nowrap border border-stone-100">
+                    <span className="text-sm text-stone-500 font-mono bg-stone-50 px-2 py-0.5 rounded w-fit sm:ml-2 whitespace-nowrap border border-stone-100">
                       {ing.quantity} {ing.unit}
                     </span>
                   </div>
