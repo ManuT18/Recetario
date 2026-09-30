@@ -66,9 +66,9 @@ export default async function RecetaPage({ params }: { params: Promise<{ id: str
         )}
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+      <div className="flex flex-col lg:flex-row gap-10">
         {/* Ingredientes */}
-        <div className="md:col-span-1">
+        <div className="w-full lg:w-2/5 shrink-0">
           <div className="bg-white p-6 rounded-xl border border-stone-100 shadow-sm">
             <h2 className="text-2xl font-serif font-semibold text-stone-800 mb-5 border-b border-stone-100 pb-3">
               Ingredientes
@@ -76,9 +76,9 @@ export default async function RecetaPage({ params }: { params: Promise<{ id: str
             <ul className="space-y-4">
               {recipe.ingredients?.map((ing, i) => (
                 <li key={i} className="flex flex-col text-stone-700">
-                  <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 sm:gap-2 border-b border-stone-100 pb-2 last:border-0 last:pb-0">
+                  <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 border-b border-stone-100 pb-2 last:border-0 last:pb-0">
                     <span className="font-medium leading-tight">{ing.name}</span>
-                    <span className="text-sm text-stone-500 font-mono bg-stone-50 px-2 py-0.5 rounded w-fit sm:ml-2 whitespace-nowrap border border-stone-100">
+                    <span className="text-sm text-stone-500 font-mono bg-stone-50 px-2 py-1 rounded w-fit sm:max-w-[60%] sm:text-right border border-stone-100 leading-snug">
                       {ing.quantity} {ing.unit}
                     </span>
                   </div>
@@ -89,7 +89,7 @@ export default async function RecetaPage({ params }: { params: Promise<{ id: str
         </div>
 
         {/* Pasos */}
-        <div className="md:col-span-2">
+        <div className="w-full lg:w-3/5">
           <h2 className="text-2xl font-serif font-semibold text-stone-800 mb-6 px-2">
             Preparación
           </h2>
