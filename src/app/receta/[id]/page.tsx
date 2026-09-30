@@ -96,7 +96,7 @@ export default async function RecetaPage({ params }: { params: Promise<{ id: str
           <div className="space-y-6">
             {recipe.steps?.map((step, i) => (
               <div key={i} className="flex gap-5 bg-white p-6 rounded-xl border border-stone-100 shadow-sm">
-                <div className="flex-shrink-0 w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold font-serif text-xl border border-primary/20">
+                <div className="flex-shrink-0 w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold font-serif text-xl border border-primary/20 leading-none pb-[2px]">
                   {i + 1}
                 </div>
                 <p className="text-stone-700 leading-relaxed pt-1.5 text-lg">
