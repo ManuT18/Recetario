@@ -20,7 +20,7 @@ export default function RootLayout({
     <html lang="es">
       <body className={`${inter.variable} ${playfair.variable} font-sans min-h-screen bg-[#fafaf9] text-[#1c1917] flex flex-col antialiased`}>
         <Navbar />
-        <main className="flex-1 w-full max-w-5xl mx-auto p-5 md:p-8 flex flex-col">
+        <main className="flex-1 w-full max-w-7xl mx-auto p-5 md:p-8 flex flex-col">
           {children}
         </main>
       </body>

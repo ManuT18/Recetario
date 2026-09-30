@@ -9,7 +9,7 @@ export default async function Navbar() {
 
   return (
     <nav className="w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50">
-      <div className="w-full max-w-5xl mx-auto flex justify-between items-center h-16 px-5">
+      <div className="w-full max-w-7xl mx-auto flex justify-between items-center h-16 px-5">
         <Link href="/" className="font-bold text-2xl font-serif text-primary">
           Recetario.
         </Link>
