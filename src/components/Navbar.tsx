@@ -20,7 +20,7 @@ export default async function Navbar() {
                 <Button variant="default" size="sm">Nueva Receta</Button>
               </Link>
               <form action={logout}>
-                <Button variant="ghost" size="sm">Salir</Button>
+                <Button type="submit" variant="ghost" size="sm">Salir</Button>
               </form>
             </>
           ) : (
