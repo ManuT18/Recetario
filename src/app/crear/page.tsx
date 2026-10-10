@@ -19,6 +19,8 @@ export default function CrearReceta() {
   const [description, setDescription] = useState('')
   const [ingredients, setIngredients] = useState<Ingredient[]>([{ name: '', quantity: '', unit: '' }])
   const [steps, setSteps] = useState<string[]>([''])
+  const [hasScaleCalculator, setHasScaleCalculator] = useState(false)
+  const [hasAbvCalculator, setHasAbvCalculator] = useState(false)
   const [loading, setLoading] = useState(false)
 
   const handleAddIngredient = () => setIngredients([...ingredients, { name: '', quantity: '', unit: '' }])
@@ -62,7 +64,9 @@ export default function CrearReceta() {
           title,
           description,
           ingredients: cleanIngredients,
-          steps: cleanSteps
+          steps: cleanSteps,
+          has_scale_calculator: hasScaleCalculator,
+          has_abv_calculator: hasAbvCalculator
         })
         .select()
         .single()
@@ -175,6 +179,39 @@ export default function CrearReceta() {
           <Button type="button" variant="outline" onClick={handleAddStep} className="w-full border-dashed">
             + Agregar Paso
           </Button>
+        </div>
+
+        <div className="space-y-4 p-6 bg-white rounded-xl shadow-sm border border-stone-200">
+          <Label className="text-xl font-serif font-semibold">Herramientas Interactivas</Label>
+          <p className="text-sm text-stone-500 mb-4">Activa estas opciones para mostrar paneles de cálculo inteligentes en la receta.</p>
+          
+          <div className="flex items-start space-x-3 p-3 rounded-lg hover:bg-stone-50 transition-colors">
+            <input 
+              type="checkbox" 
+              id="scale_calc"
+              checked={hasScaleCalculator}
+              onChange={(e) => setHasScaleCalculator(e.target.checked)}
+              className="mt-1 w-4 h-4 text-primary rounded border-stone-300 focus:ring-primary"
+            />
+            <div className="flex flex-col">
+              <Label htmlFor="scale_calc" className="font-medium cursor-pointer">Calculadora de Proporciones (Regla de Tres)</Label>
+              <span className="text-sm text-stone-500 cursor-pointer">Ideal para panes o galletas. Permite multiplicar toda la receta.</span>
+            </div>
+          </div>
+
+          <div className="flex items-start space-x-3 p-3 rounded-lg hover:bg-stone-50 transition-colors">
+            <input 
+              type="checkbox" 
+              id="abv_calc"
+              checked={hasAbvCalculator}
+              onChange={(e) => setHasAbvCalculator(e.target.checked)}
+              className="mt-1 w-4 h-4 text-primary rounded border-stone-300 focus:ring-primary"
+            />
+            <div className="flex flex-col">
+              <Label htmlFor="abv_calc" className="font-medium cursor-pointer">Calculadora de Licores (Dilución ABV)</Label>
+              <span className="text-sm text-stone-500 cursor-pointer">Ideal para Limoncello. Calcula agua y azúcar según el % de alcohol deseado.</span>
+            </div>
+          </div>
         </div>
 
         <Button type="submit" className="w-full h-12 text-lg font-semibold" disabled={loading}>

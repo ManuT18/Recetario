@@ -14,4 +14,6 @@ export type Recipe = {
   steps: string[];
   image_url: string | null;
   author_name: string | null;
+  has_scale_calculator?: boolean;
+  has_abv_calculator?: boolean;
 }

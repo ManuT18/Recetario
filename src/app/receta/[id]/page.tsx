@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button'
 import type { Recipe } from '@/types/database'
 import { deleteRecipe } from './actions'
 import { Edit, Trash2 } from 'lucide-react'
+import InteractiveIngredients from '@/components/InteractiveIngredients'
 
 export default async function RecetaPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
@@ -69,23 +70,11 @@ export default async function RecetaPage({ params }: { params: Promise<{ id: str
       <div className="flex flex-col lg:flex-row gap-10">
         {/* Ingredientes */}
         <div className="w-full lg:w-2/5 shrink-0">
-          <div className="bg-white p-6 rounded-xl border border-stone-100 shadow-sm">
-            <h2 className="text-2xl font-serif font-semibold text-stone-800 mb-5 border-b border-stone-100 pb-3">
-              Ingredientes
-            </h2>
-            <ul className="space-y-4">
-              {recipe.ingredients?.map((ing, i) => (
-                <li key={i} className="flex flex-col text-stone-700">
-                  <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 border-b border-stone-100 pb-2 last:border-0 last:pb-0">
-                    <span className="font-medium leading-tight flex-1 min-w-0 pr-2">{ing.name}</span>
-                    <span className="text-sm text-stone-500 font-mono bg-stone-50 px-2 py-1 rounded shrink-0 w-fit sm:max-w-[60%] sm:text-right border border-stone-100 leading-snug">
-                      {ing.quantity}&nbsp;{ing.unit}
-                    </span>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </div>
+          <InteractiveIngredients 
+            ingredients={recipe.ingredients as any} 
+            hasScale={recipe.has_scale_calculator} 
+            hasAbv={recipe.has_abv_calculator} 
+          />
         </div>
 
         {/* Pasos */}
